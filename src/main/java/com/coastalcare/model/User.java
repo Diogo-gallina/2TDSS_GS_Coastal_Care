@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -46,5 +47,8 @@ public class User {
 
     @Column(name = "deleted_at")
     private LocalDate deletedAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
 
 }
