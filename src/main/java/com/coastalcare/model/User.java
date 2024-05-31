@@ -24,7 +24,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "user_id")
-    private Long UserId;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
@@ -51,4 +51,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Event> events;
 
+    @OneToMany(mappedBy = "user")
+    private List<Participantion> participantions;
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Event {
     @Id
     @GeneratedValue
     @Column(name = "event_id")
-    private Long eventId;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
@@ -35,4 +36,7 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "event")
+    private List<Participantion> participantions;
 }
