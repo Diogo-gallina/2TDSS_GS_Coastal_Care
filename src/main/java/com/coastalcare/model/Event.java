@@ -4,6 +4,7 @@ import com.coastalcare.model.enums.EventStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
@@ -25,13 +26,21 @@ public class Event {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
 
     @Column(name = "description", nullable = false, length = 100)
     private String description;
 
-    @Column(name = "status", nullable = false, length = 15)
+    @Column(name = "status", nullable = false)
     private EventStatus status;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false)
+    private LocalDate createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDate updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

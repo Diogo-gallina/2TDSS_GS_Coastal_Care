@@ -35,7 +35,7 @@ public class User {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "user_type", nullable = false, length = 10)
+    @Column(name = "user_type", nullable = false)
     private UserType userType;
 
     @CreatedDate
@@ -53,4 +53,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Participantion> participantions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Photo> photos;
 }
