@@ -39,4 +39,8 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private List<Participantion> participantions;
+
+    @ManyToOne
+    @JoinColumn(name = "beach_id")
+    private Beach beach;
 }
