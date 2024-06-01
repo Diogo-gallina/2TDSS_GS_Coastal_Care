@@ -1,0 +1,8 @@
+com/coastalcare/model/enums/UserType.class
+com/coastalcare/CoastalcareApplication.class
+com/coastalcare/model/Event.class
+com/coastalcare/model/User.class
+com/coastalcare/model/enums/PollutionLevel.class
+com/coastalcare/model/Beach.class
+com/coastalcare/model/enums/EventStatus.class
+com/coastalcare/model/Participantion.class
