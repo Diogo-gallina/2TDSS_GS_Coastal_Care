@@ -1,7 +1,7 @@
 package com.coastalcare.dto.user;
 
-import com.coastalcare.model.User;
-import com.coastalcare.model.enums.UserType;
+import com.coastalcare.models.User;
+import com.coastalcare.models.enums.UserType;
 
 import java.time.LocalDate;
 
@@ -10,6 +10,7 @@ public record UserDetailsDTO (
         String name,
         String email,
         UserType userType,
+        String password,
         LocalDate createdAt,
         LocalDate updatedAt
 ) {
@@ -19,6 +20,7 @@ public record UserDetailsDTO (
                 user.getName(),
                 user.getEmail(),
                 user.getUserType(),
+                user.getPassword(),
                 user.getCreatedAt(),
                 user.getUpdatedAt()
         );
