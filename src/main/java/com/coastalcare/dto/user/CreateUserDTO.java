@@ -1,6 +1,7 @@
 package com.coastalcare.dto.user;
 
 import com.coastalcare.models.enums.UserType;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,6 +14,7 @@ public record CreateUserDTO(
 
         @NotBlank(message = "Email não pode ser vazio")
         @Size(max = 100, message = "Email deve ter no máximo 100 caracteres")
+        @Email(message = "Email inválido")
         String email,
 
         @NotNull(message = "Tipo de usuário não pode ser vazio")
