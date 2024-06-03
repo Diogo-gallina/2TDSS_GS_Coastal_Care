@@ -1,6 +1,6 @@
-package com.coastalcare.model;
+package com.coastalcare.models;
 
-import com.coastalcare.model.enums.ClassificationPhoto;
+import com.coastalcare.models.enums.ClassificationPhoto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

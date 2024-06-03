@@ -1,6 +1,6 @@
-package com.coastalcare.model;
+package com.coastalcare.models;
 
-import com.coastalcare.model.enums.PollutionLevel;
+import com.coastalcare.models.enums.PollutionLevel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

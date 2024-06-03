@@ -1,6 +1,6 @@
-package com.coastalcare.model;
+package com.coastalcare.models;
 
-import com.coastalcare.model.enums.EventStatus;
+import com.coastalcare.models.enums.EventStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.coastalcare.model;
+package com.coastalcare.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

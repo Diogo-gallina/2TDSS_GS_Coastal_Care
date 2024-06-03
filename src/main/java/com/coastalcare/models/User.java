@@ -1,6 +1,7 @@
-package com.coastalcare.model;
+package com.coastalcare.models;
 
-import com.coastalcare.model.enums.UserType;
+import com.coastalcare.dto.user.CreateUserDTO;
+import com.coastalcare.models.enums.UserType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class User {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "email", nullable = false, length = 100)
+    @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(name = "password", nullable = false, length = 100)
@@ -56,4 +57,11 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Photo> photos;
+
+    public User(CreateUserDTO userDTO) {
+        name = userDTO.name();
+        email = userDTO.email();
+        password = userDTO.password();
+        userType = userDTO.type();
+    }
 }
