@@ -28,4 +28,8 @@ public class EventService {
         return eventRepository.findAll(page).map(EventDetailsDTO::new);
     }
 
+    public Event getOne(Long eventId) {
+        return eventRepository.getReferenceById(eventId);
+    }
+
 }

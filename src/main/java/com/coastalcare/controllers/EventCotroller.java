@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,9 +29,15 @@ public class EventCotroller {
     }
 
     @GetMapping
-    public ResponseEntity<Page<EventDetailsDTO>> findAll(Pageable page) {
+    public ResponseEntity<Page<EventDetailsDTO>> findAll(@PageableDefault(sort = "name") Pageable page) {
         var eventList = eventService.getAll(page);
         return ResponseEntity.ok(eventList);
+    }
+
+    @GetMapping("/{event_id}")
+    public ResponseEntity<EventDetailsDTO> findOne(@PathVariable("event_id") Long eventId) {
+        var event = eventService.getOne(eventId);
+        return ResponseEntity.ok(new EventDetailsDTO((event)));
     }
 
 }
