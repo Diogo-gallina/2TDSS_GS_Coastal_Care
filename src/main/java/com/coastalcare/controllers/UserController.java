@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,15 +30,21 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserDetailsDTO>> findAll(Pageable page) {
+    public ResponseEntity<Page<UserDetailsDTO>> findAll(@PageableDefault(sort = "name") Pageable page) {
         var usersList = userService.getAll(page);
         return ResponseEntity.ok(usersList);
     }
 
     @GetMapping("/{user_id}")
-    public ResponseEntity<UserDetailsDTO> findOne(@PathVariable("user_id") Long id) {
-        var user = userService.getOne(id);
+    public ResponseEntity<UserDetailsDTO> findOne(@PathVariable("user_id") Long userId) {
+        var user = userService.getOne(userId);
         return ResponseEntity.ok(new UserDetailsDTO(user));
+    }
+
+    @DeleteMapping("/{user_id}")
+    public ResponseEntity<Void> delete(@PathVariable("user_id") Long userId) {
+        userService.delete(userId);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -46,9 +46,6 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @Column(name = "deleted_at")
-    private LocalDate deletedAt;
-
     @OneToMany(mappedBy = "user")
     private List<Event> events;
 
