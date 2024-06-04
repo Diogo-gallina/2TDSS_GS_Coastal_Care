@@ -2,6 +2,7 @@ package com.coastalcare.controllers;
 
 import com.coastalcare.dto.event.CreateEventDTO;
 import com.coastalcare.dto.event.EventDetailsDTO;
+import com.coastalcare.dto.event.UpdateEventDTO;
 import com.coastalcare.models.Event;
 import com.coastalcare.services.EventService;
 import jakarta.validation.Valid;
@@ -37,6 +38,13 @@ public class EventCotroller {
     @GetMapping("/{event_id}")
     public ResponseEntity<EventDetailsDTO> findOne(@PathVariable("event_id") Long eventId) {
         var event = eventService.getOne(eventId);
+        return ResponseEntity.ok(new EventDetailsDTO((event)));
+    }
+
+    @PutMapping("/{event_id}")
+    public ResponseEntity<EventDetailsDTO> update(@PathVariable("event_id") Long eventId,
+                                                  @RequestBody @Valid UpdateEventDTO eventDTO) {
+        var event = eventService.update(eventId, eventDTO);
         return ResponseEntity.ok(new EventDetailsDTO((event)));
     }
 
