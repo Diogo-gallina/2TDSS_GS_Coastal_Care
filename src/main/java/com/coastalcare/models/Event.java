@@ -1,5 +1,6 @@
 package com.coastalcare.models;
 
+import com.coastalcare.dto.event.CreateEventDTO;
 import com.coastalcare.models.enums.EventStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -55,4 +56,10 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "beach_id")
     private Beach beach;
+
+    public Event(CreateEventDTO eventDTO) {
+        name = eventDTO.name();
+        eventDate = eventDTO.eventDate();
+        description = eventDTO.description();
+    }
 }
