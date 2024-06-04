@@ -1,7 +1,7 @@
 # CoastalCare
 
 ## Diagrama Entidade Relacionamento (DER)
-![DER.png](src/doc-images/DER.png)
+![DER.png](doc-images/DER.png)
 
 ## Rotas
 | **Recurso** | **Rota**           | **Método** | **Descrição**           |
