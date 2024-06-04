@@ -32,4 +32,8 @@ public class EventService {
         return eventRepository.getReferenceById(eventId);
     }
 
+    public void delete(Long eventId) {
+        eventRepository.deleteById(eventId);
+    }
+
 }

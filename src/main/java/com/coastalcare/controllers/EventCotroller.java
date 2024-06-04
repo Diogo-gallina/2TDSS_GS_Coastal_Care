@@ -40,4 +40,10 @@ public class EventCotroller {
         return ResponseEntity.ok(new EventDetailsDTO((event)));
     }
 
-}
+    @DeleteMapping("/{event_id}")
+    public ResponseEntity<Void> delete(@PathVariable("event_id") Long eventId) {
+        eventService.delete(eventId);
+        return ResponseEntity.noContent().build();
+    }
+
+    }
