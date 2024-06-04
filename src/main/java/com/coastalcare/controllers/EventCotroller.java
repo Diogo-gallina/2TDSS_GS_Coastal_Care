@@ -54,4 +54,4 @@ public class EventCotroller {
         return ResponseEntity.noContent().build();
     }
 
-    }
+}

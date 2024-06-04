@@ -3,9 +3,13 @@ package com.coastalcare.services;
 import com.coastalcare.dto.event.CreateEventDTO;
 import com.coastalcare.dto.event.EventDetailsDTO;
 import com.coastalcare.dto.event.UpdateEventDTO;
+import com.coastalcare.models.Beach;
 import com.coastalcare.models.Event;
+import com.coastalcare.models.User;
 import com.coastalcare.models.enums.EventStatus;
+import com.coastalcare.repositories.BeachRepository;
 import com.coastalcare.repositories.EventRepository;
+import com.coastalcare.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +23,18 @@ public class EventService {
 
     @Autowired
     EventRepository eventRepository;
+    @Autowired
+    BeachRepository beachRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Transactional
     public Event create(CreateEventDTO eventDTO) {
+        Beach beach = beachRepository.getReferenceById(eventDTO.beachId());
+        User userCreator = userRepository.getReferenceById(eventDTO.userId());
         Event event = new Event(eventDTO);
+        event.setUser(userCreator);
+        event.setBeach(beach);
         event.setStatus(EventStatus.PLANNED);
         return eventRepository.save(event);
     }
