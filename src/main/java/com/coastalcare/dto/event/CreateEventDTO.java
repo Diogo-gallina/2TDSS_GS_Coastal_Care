@@ -19,7 +19,7 @@ public record CreateEventDTO (
         LocalDate eventDate,
 
         @NotBlank(message = "Descrição não pode ser vazia")
-        @Size(max = 600, message = "Nome deve ter no máximo 600 caracteres")
+        @Size(max = 600, message = "Descrição deve ter no máximo 600 caracteres")
         String description
 
 ) {
