@@ -3,7 +3,9 @@ package com.coastalcare.models;
 import com.coastalcare.models.enums.EventStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter @Setter
 
 @Entity
 @Table(name = "GS_2TDSS_EVENT")
@@ -29,7 +32,7 @@ public class Event {
     @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
 
-    @Column(name = "description", nullable = false, length = 100)
+    @Column(name = "description", nullable = false, length = 600)
     private String description;
 
     @Column(name = "status", nullable = false)
