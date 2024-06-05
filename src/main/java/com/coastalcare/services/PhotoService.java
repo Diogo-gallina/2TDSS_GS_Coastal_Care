@@ -37,4 +37,8 @@ public class PhotoService {
         return photoRepository.findAll(page).map(PhotoDetailsDTO::new);
     }
 
+    public Photo getOne(Long photoId){
+        return photoRepository.getReferenceById(photoId);
+    }
+
 }

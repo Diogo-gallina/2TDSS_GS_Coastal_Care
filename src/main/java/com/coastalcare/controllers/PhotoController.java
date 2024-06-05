@@ -31,6 +31,12 @@ public class PhotoController {
     public ResponseEntity<Page<PhotoDetailsDTO>> findAll(Pageable page){
         var photoList = photoService.getAll(page);
         return ResponseEntity.ok(photoList);
-}
+    }
+
+    @GetMapping("/{photo_id}")
+    public ResponseEntity<PhotoDetailsDTO> findOne(@PathVariable("photo_id") Long photoId){
+        Photo photo = photoService.getOne(photoId);
+        return ResponseEntity.ok(new PhotoDetailsDTO(photo));
+    }
 
 }
