@@ -1,5 +1,6 @@
 package com.coastalcare.models;
 
+import com.coastalcare.dto.photo.UploadPhotoDTO;
 import com.coastalcare.models.enums.ClassificationPhoto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,4 +45,10 @@ public class Photo {
     @JoinColumn(name = "beach_id")
     private Beach beach;
 
+    public Photo(UploadPhotoDTO photoDTO, User user, Beach beach) {
+        this.url = photoDTO.url();
+        this.classification = photoDTO.classification();
+        this.user = user;
+        this.beach = beach;
+    }
 }
