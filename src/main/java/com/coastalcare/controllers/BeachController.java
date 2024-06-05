@@ -41,6 +41,13 @@ public class BeachController {
         return ResponseEntity.ok(new BeachDetailsDTO(beach));
     }
 
+    @GetMapping("byname")
+    public ResponseEntity<Page<BeachDetailsDTO>> findByName(@RequestParam("name") String name,
+                                                                  Pageable page) {
+        var beaches = beachService.findByName(name, page);
+        return ResponseEntity.ok(beaches);
+    }
+
     @PutMapping("/{beach_id}")
     public ResponseEntity<BeachDetailsDTO> update(@PathVariable("beach_id") Long beachId,
                                                   @RequestBody @Valid UpdateBeachDTO beachDTO) {

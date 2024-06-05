@@ -13,6 +13,7 @@
 | User          | /users/:user_id                                | DELETE     | Deleta um usuário                                                   |
 | Beach         | /beaches                                       | POST       | Cria uma praia                                                      |
 | Beach         | /beaches                                       | GET        | Busca todas as praias                                               |
+| Beach         | /beaches/byname                                | GET        | Busca todas por uma parte do nome                                   |
 | Beach         | /beaches/:beach_id                             | GET        | Busca praia pelo ID                                                 |
 | Beach         | /beaches/:beach_id                             | PUT        | Atualiza uma praia                                                  |
 | Beach         | /beaches/:beach_id                             | DELETE     | Deleta uma praia                                                    |
@@ -30,6 +31,6 @@
 | Photo         | /photos/:photo_id                              | GET        | Busca foto pelo ID                                                  |
 | Photo         | /photos/:beach_id                              | GET        | Busca todas as fotos de uma praia                                   |
 | Photo         | /photos/:user_id                               | GET        | Busca todas as fotos que um usuário adicionou                       |
-| Event         | /photos/:photo_id                              | PUT        | Atualiza uma foto                                                   |
+| Photo         | /photos/:photo_id                              | PUT        | Atualiza uma foto                                                   |
 | Photo         | /photos/:photo_id                              | DELETE     | Deleta uma foto pelo id                                             |
 |
