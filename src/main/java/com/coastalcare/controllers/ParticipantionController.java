@@ -7,10 +7,7 @@ import com.coastalcare.services.ParticipantionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -27,6 +24,13 @@ public class ParticipantionController {
         var url = uri.path("/participantions/{participantions_id}")
                 .buildAndExpand(participantion.getId()).toUri();
         return ResponseEntity.created(url).body(new ParticipationDetailsDTO(participantion));
+    }
+
+    @PutMapping ("/{participation_id}/users/{user_id}")
+    ResponseEntity<ParticipationDetailsDTO> checkIn(@PathVariable("participation_id") Long participationId,
+                                           @PathVariable("user_id") Long userId){
+        Participantion participantion = participantionService.checkIn(participationId, userId);
+        return ResponseEntity.ok(new ParticipationDetailsDTO(participantion));
     }
 
 }

@@ -3,7 +3,7 @@ package com.coastalcare.infra.exceptions;
 public class PasswordConfirmationException extends RuntimeException {
 
     public PasswordConfirmationException() {
-        super("Password does not match the confirmation.");
+        super("Senha não é igual a confirmação");
     }
 
     public PasswordConfirmationException(String message) {
