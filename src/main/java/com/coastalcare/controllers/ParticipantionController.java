@@ -6,6 +6,8 @@ import com.coastalcare.models.Participantion;
 import com.coastalcare.services.ParticipantionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -31,6 +33,13 @@ public class ParticipantionController {
                                            @PathVariable("user_id") Long userId){
         Participantion participantion = participantionService.checkIn(participationId, userId);
         return ResponseEntity.ok(new ParticipationDetailsDTO(participantion));
+    }
+
+    @GetMapping("/users/{user_id}")
+    public ResponseEntity<Page<ParticipationDetailsDTO>> findAllUserParticipations(@PathVariable("user_id") Long userId,
+                                                                                   Pageable page) {
+        var userParticipations = participantionService.getAllUserParticipations(userId, page);
+        return ResponseEntity.ok(userParticipations);
     }
 
     @DeleteMapping("/{participation_id}/users/{user_id}")

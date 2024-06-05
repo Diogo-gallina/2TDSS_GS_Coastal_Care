@@ -1,5 +1,6 @@
 package com.coastalcare.services;
 
+import com.coastalcare.dto.Participation.ParticipationDetailsDTO;
 import com.coastalcare.dto.Participation.RegisterParticipationDTO;
 import com.coastalcare.infra.exceptions.EventHasNoAssociationWithUserException;
 import com.coastalcare.infra.exceptions.ExpiredEventException;
@@ -11,11 +12,15 @@ import com.coastalcare.repositories.ParticipationRepository;
 import com.coastalcare.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ParticipantionService {
@@ -27,6 +32,7 @@ public class ParticipantionService {
     @Autowired
     EventRepository eventRepository;
 
+    @Transactional
     public Participantion register(RegisterParticipationDTO participationDTO) {
         User user = userRepository.getReferenceById(participationDTO.userId());
         Event event = eventRepository.getReferenceById(participationDTO.eventId());
@@ -48,6 +54,15 @@ public class ParticipantionService {
         participation.setParticiparionDate(LocalDate.now());
 
         return participationRepository.save(participation);
+    }
+
+    public Page<ParticipationDetailsDTO> getAllUserParticipations(Long userId, Pageable page) {
+        User user = userRepository.getReferenceById(userId);
+        List<ParticipationDetailsDTO> participationDetailsDTOs = user.getParticipantions().stream()
+                .map(ParticipationDetailsDTO::new)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(participationDetailsDTOs, page, participationDetailsDTOs.size());
     }
 
     @Transactional
