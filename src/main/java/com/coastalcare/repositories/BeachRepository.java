@@ -12,7 +12,7 @@ public interface BeachRepository extends JpaRepository<Beach, Long> {
     @Query("from Beach b where LOWER(b.name) like LOWER(CONCAT('%', :name, '%'))")
     Page<Beach> findByName(@Param("name") String name, Pageable page);
 
-//    @Query("")
-//    Page<Beach> findByPollutionLevel(@Param("pollution_level") String pollutionLevel, Pageable page);
+    @Query("from Beach b where LOWER(b.pollutionLevel) = LOWER(:pollution_level)")
+    Page<Beach> findByPollutionLevel(@Param("pollution_level") String pollutionLevel, Pageable page);
 
 }

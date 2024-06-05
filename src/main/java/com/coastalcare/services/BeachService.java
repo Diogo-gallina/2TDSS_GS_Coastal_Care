@@ -9,9 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
@@ -41,6 +39,10 @@ public class BeachService {
                 .map(BeachDetailsDTO::new);
     }
 
+    public Page<BeachDetailsDTO> findByPollutionLevel(String pollutionLevel, Pageable page) {
+        return beachRepository.findByPollutionLevel(pollutionLevel, page)
+                .map(BeachDetailsDTO::new);
+    }
 
     @Transactional
     public BeachDetailsDTO update(Long beachId, UpdateBeachDTO beachDTO) {

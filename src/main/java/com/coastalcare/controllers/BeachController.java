@@ -41,10 +41,17 @@ public class BeachController {
         return ResponseEntity.ok(new BeachDetailsDTO(beach));
     }
 
-    @GetMapping("byname")
+    @GetMapping("/by-name")
     public ResponseEntity<Page<BeachDetailsDTO>> findByName(@RequestParam("name") String name,
                                                                   Pageable page) {
         var beaches = beachService.findByName(name, page);
+        return ResponseEntity.ok(beaches);
+    }
+
+    @GetMapping("/by-pollution-level")
+    public ResponseEntity<Page<BeachDetailsDTO>> findByPollutionLevel(@RequestParam("pollution_level") String pollutionLevel,
+                                                            Pageable page) {
+        var beaches = beachService.findByPollutionLevel(pollutionLevel, page);
         return ResponseEntity.ok(beaches);
     }
 
