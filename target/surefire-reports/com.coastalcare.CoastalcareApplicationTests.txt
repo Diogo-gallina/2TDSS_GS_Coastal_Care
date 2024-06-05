@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: com.coastalcare.CoastalcareApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 7.319 s <<< FAILURE! -- in com.coastalcare.CoastalcareApplicationTests
-com.coastalcare.CoastalcareApplicationTests.contextLoads -- Time elapsed: 0.006 s <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@25e353dc testClass = com.coastalcare.CoastalcareApplicationTests, locations = [], classes = [com.coastalcare.CoastalcareApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@4b013c76, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7bba5817, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@48075da3, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@496bc455, org.springframework.boot.test.context.SpringBootTestAnnotation@4de7ea48], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 15.48 s <<< FAILURE! -- in com.coastalcare.CoastalcareApplicationTests
+com.coastalcare.CoastalcareApplicationTests.contextLoads -- Time elapsed: 0.013 s <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@5cca5ff3 testClass = com.coastalcare.CoastalcareApplicationTests, locations = [], classes = [com.coastalcare.CoastalcareApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@17f9d882, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@4a83a74a, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@16eb3ea3, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@4082ba93, org.springframework.boot.test.context.SpringBootTestAnnotation@f9c4672b], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
 	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191)
@@ -22,7 +22,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMerge
 	at java.base/java.util.Optional.orElseGet(Optional.java:364)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Column 'name' is duplicated in mapping for entity 'com.coastalcare.model.Beach' (use '@Column(insertable=false, updatable=false)' when mapping multiple properties to the same column)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to build DatabaseInformation [Erro de ES: Connection reset] [n/a]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1788)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
@@ -45,25 +45,84 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
 	... 17 more
-Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Column 'name' is duplicated in mapping for entity 'com.coastalcare.model.Beach' (use '@Column(insertable=false, updatable=false)' when mapping multiple properties to the same column)
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to build DatabaseInformation [Erro de ES: Connection reset] [n/a]
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1835)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1784)
 	... 37 more
-Caused by: org.hibernate.MappingException: Column 'name' is duplicated in mapping for entity 'com.coastalcare.model.Beach' (use '@Column(insertable=false, updatable=false)' when mapping multiple properties to the same column)
-	at org.hibernate.mapping.Value.checkColumnDuplication(Value.java:196)
-	at org.hibernate.mapping.MappingHelper.checkPropertyColumnDuplication(MappingHelper.java:251)
-	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:939)
-	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:694)
-	at org.hibernate.mapping.RootClass.validate(RootClass.java:276)
-	at org.hibernate.boot.internal.MetadataImpl.validate(MetadataImpl.java:496)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:280)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to build DatabaseInformation [Erro de ES: Connection reset] [n/a]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:100)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:194)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:322)
 	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:457)
 	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1506)
 	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
 	... 41 more
+Caused by: java.sql.SQLRecoverableException: Erro de ES: Connection reset
+	at oracle.jdbc.driver.T4CPreparedStatement.fetch(T4CPreparedStatement.java:1471)
+	at oracle.jdbc.driver.OracleStatement.fetchMoreRows(OracleStatement.java:4126)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.fetchMoreRows(InsensitiveScrollableResultSet.java:923)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.fetchNextRows(InsensitiveScrollableResultSet.java:830)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.absoluteInternal(InsensitiveScrollableResultSet.java:802)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.next(InsensitiveScrollableResultSet.java:503)
+	at com.zaxxer.hikari.pool.HikariProxyResultSet.next(HikariProxyResultSet.java)
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.lambda$extractMetadata$0(SequenceInformationExtractorLegacyImpl.java:46)
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:50)
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66)
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60)
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185)
+	... 54 more
+	Suppressed: java.sql.SQLRecoverableException: Conexão Fechada
+		at oracle.jdbc.driver.OracleStatement.ensureOpen(OracleStatement.java:5006)
+		at oracle.jdbc.driver.OracleStatement.clearWarnings(OracleStatement.java:3880)
+		at oracle.jdbc.driver.OracleStatement.prepareForNewResults(OracleStatement.java:4473)
+		at oracle.jdbc.driver.OraclePreparedStatement.endOfResultSet(OraclePreparedStatement.java:9351)
+		at oracle.jdbc.driver.InsensitiveScrollableResultSet.close(InsensitiveScrollableResultSet.java:299)
+		at oracle.jdbc.driver.ForwardOnlyResultSet.close(ForwardOnlyResultSet.java:65)
+		at com.zaxxer.hikari.pool.HikariProxyResultSet.close(HikariProxyResultSet.java)
+		at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:49)
+		... 58 more
+	Suppressed: java.sql.SQLRecoverableException: Conexão Fechada
+		at oracle.jdbc.driver.PhysicalConnection.requireOpenConnection(PhysicalConnection.java:11781)
+		at oracle.jdbc.driver.PhysicalConnection.needLine(PhysicalConnection.java:4259)
+		at oracle.jdbc.driver.OracleStatement.closeOrCache(OracleStatement.java:2170)
+		at oracle.jdbc.driver.OracleStatement.close(OracleStatement.java:2153)
+		at oracle.jdbc.driver.OracleStatementWrapper.close(OracleStatementWrapper.java:146)
+		at oracle.jdbc.driver.OraclePreparedStatementWrapper.close(OraclePreparedStatementWrapper.java:114)
+		at com.zaxxer.hikari.pool.ProxyStatement.close(ProxyStatement.java:75)
+		at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43)
+		... 58 more
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
+	at oracle.net.nt.TimeoutSocketChannel.read(TimeoutSocketChannel.java:415)
+	at oracle.net.ns.NSProtocolNIO.doSocketRead(NSProtocolNIO.java:1127)
+	at oracle.net.ns.NIOPacket.readHeader(NIOPacket.java:266)
+	at oracle.net.ns.NIOPacket.readPacketFromSocketChannel(NIOPacket.java:198)
+	at oracle.net.ns.NIOPacket.readFromSocketChannel(NIOPacket.java:140)
+	at oracle.net.ns.NIOPacket.readFromSocketChannel(NIOPacket.java:113)
+	at oracle.net.ns.NIONSDataChannel.readDataFromSocketChannel(NIONSDataChannel.java:97)
+	at oracle.jdbc.driver.T4CMAREngineNIO.prepareForUnmarshall(T4CMAREngineNIO.java:833)
+	at oracle.jdbc.driver.T4CMAREngineNIO.unmarshalUB1(T4CMAREngineNIO.java:486)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:622)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:298)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:511)
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:162)
+	at oracle.jdbc.driver.T4CPreparedStatement.fetch(T4CPreparedStatement.java:1466)
+	... 66 more
 
