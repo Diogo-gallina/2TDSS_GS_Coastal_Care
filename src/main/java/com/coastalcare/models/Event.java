@@ -37,6 +37,7 @@ public class Event {
     @Column(name = "description", nullable = false, length = 600)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private EventStatus status;
 

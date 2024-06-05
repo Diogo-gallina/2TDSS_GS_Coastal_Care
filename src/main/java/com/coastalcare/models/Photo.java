@@ -30,6 +30,7 @@ public class Photo {
     @Column(name = "url", nullable = false, length = 1500)
     private String url;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "classification", nullable = false)
     private ClassificationPhoto classification;
 

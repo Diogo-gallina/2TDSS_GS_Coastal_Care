@@ -36,6 +36,7 @@ public class Beach {
     @Column(name = "longitude", nullable = false)
     private Long longitude;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "pollution_level", nullable = false)
     private PollutionLevel pollutionLevel;
 
