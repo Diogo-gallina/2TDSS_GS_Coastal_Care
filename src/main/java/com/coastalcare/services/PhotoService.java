@@ -1,5 +1,6 @@
 package com.coastalcare.services;
 
+import com.coastalcare.dto.Participation.ParticipationDetailsDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
 import com.coastalcare.models.Beach;
@@ -11,8 +12,12 @@ import com.coastalcare.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PhotoService {
@@ -39,6 +44,15 @@ public class PhotoService {
 
     public Photo getOne(Long photoId){
         return photoRepository.getReferenceById(photoId);
+    }
+
+    public Page<PhotoDetailsDTO> getAllUserPhotos(Long userId, Pageable page) {
+        User user = userRepository.getReferenceById(userId);
+        List<PhotoDetailsDTO> photoDetailsDTOs = user.getPhotos().stream()
+                .map(PhotoDetailsDTO::new)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(photoDetailsDTOs, page, photoDetailsDTOs.size());
     }
 
 }
