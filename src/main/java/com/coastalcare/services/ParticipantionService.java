@@ -40,11 +40,7 @@ public class ParticipantionService {
         User user = userRepository.getReferenceById(userId);
         Participantion participation = participationRepository.getReferenceById(participationId);
         LocalDateTime eventDate = participation.getEvent().getEventDate();
-
-        List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
-
-        if(!userEventsIndexes.contains(participation.getEvent().getId()))
-            throw new EventHasNoAssociationWithUserException();
+        checkEventAssociationWithUser(user, participation);
 
         if(LocalDate.now().isAfter(eventDate.toLocalDate()))
             throw new ExpiredEventException();
@@ -58,13 +54,15 @@ public class ParticipantionService {
     public void remove(Long participationId, Long userId){
         User user = userRepository.getReferenceById(userId);
         Participantion participation = participationRepository.getReferenceById(participationId);
-
-        List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
-
-        if(!userEventsIndexes.contains(participation.getEvent().getId()))
-            throw new EventHasNoAssociationWithUserException();
+        checkEventAssociationWithUser(user, participation);
 
         participationRepository.deleteById(participationId);
+    }
+
+    public static void checkEventAssociationWithUser(User user, Participantion participation){
+        List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
+        if(!userEventsIndexes.contains(participation.getEvent().getId()))
+            throw new EventHasNoAssociationWithUserException();
     }
 
 }
