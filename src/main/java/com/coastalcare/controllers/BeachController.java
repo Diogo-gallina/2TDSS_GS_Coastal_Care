@@ -2,6 +2,7 @@ package com.coastalcare.controllers;
 
 import com.coastalcare.dto.beach.BeachDetailsDTO;
 import com.coastalcare.dto.beach.CreateBeachDTO;
+import com.coastalcare.dto.beach.PollutionLevelCountDTO;
 import com.coastalcare.dto.beach.UpdateBeachDTO;
 import com.coastalcare.models.Beach;
 import com.coastalcare.services.BeachService;
@@ -13,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/beaches")
@@ -54,6 +57,13 @@ public class BeachController {
         var beaches = beachService.findByPollutionLevel(pollutionLevel, page);
         return ResponseEntity.ok(beaches);
     }
+
+    @GetMapping("/by-pollution-level-count")
+    public ResponseEntity<List<PollutionLevelCountDTO>> getBeachCountByPollutionLevel() {
+        List<PollutionLevelCountDTO> counts = beachService.getBeachCountByPollutionLevel();
+        return ResponseEntity.ok(counts);
+    }
+
 
     @PutMapping("/{beach_id}")
     public ResponseEntity<BeachDetailsDTO> update(@PathVariable("beach_id") Long beachId,

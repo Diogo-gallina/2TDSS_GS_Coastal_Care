@@ -15,6 +15,7 @@
 | Beach         | /beaches                                       | GET        | Busca todas as praias                                               |
 | Beach         | /beaches/by-name                               | GET        | Busca todas por uma parte do nome                                   |
 | Beach         | /beaches/by-pollution-level                    | GET        | Busca todas por nível de poluição                                   |
+| Beach         | /beaches/by-pollution-level-count              | GET        | Agrupa por nível de poluição                                        |
 | Beach         | /beaches/:beach_id                             | GET        | Busca praia pelo ID                                                 |
 | Beach         | /beaches/:beach_id                             | PUT        | Atualiza uma praia                                                  |
 | Beach         | /beaches/:beach_id                             | DELETE     | Deleta uma praia                                                    |
