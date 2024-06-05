@@ -24,9 +24,12 @@ public class Participantion {
     @Column(name = "participation_id")
     private Long id;
 
-    @CreatedDate
     @Column(name = "participarion_date")
     private LocalDate participarionDate;
+
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDate createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -36,4 +39,8 @@ public class Participantion {
     @JoinColumn(name = "event_id")
     private Event event;
 
+    public Participantion(User user, Event event) {
+        this.user = user;
+        this.event = event;
+    }
 }

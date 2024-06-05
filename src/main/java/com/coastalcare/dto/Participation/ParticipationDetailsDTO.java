@@ -8,7 +8,8 @@ public record ParticipationDetailsDTO(
         Long participationId,
         Long userId,
         Long eventId,
-        LocalDate participationDate
+        LocalDate participationDate,
+        LocalDate createdAt
 ) {
 
     public ParticipationDetailsDTO(Participantion participantion){
@@ -16,7 +17,8 @@ public record ParticipationDetailsDTO(
                 participantion.getId(),
                 participantion.getUser().getId(),
                 participantion.getEvent().getId(),
-                participantion.getParticiparionDate()
+                participantion.getParticiparionDate(),
+                participantion.getCreatedAt()
         );
     }
 
