@@ -9,6 +9,7 @@ import com.coastalcare.models.User;
 import com.coastalcare.repositories.EventRepository;
 import com.coastalcare.repositories.ParticipationRepository;
 import com.coastalcare.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,21 +35,36 @@ public class ParticipantionService {
         return participationRepository.save(participantion);
     }
 
+    @Transactional
     public Participantion checkIn(Long participationId, Long userId){
         User user = userRepository.getReferenceById(userId);
-        Participantion participantion = participationRepository.getReferenceById(participationId);
-        LocalDateTime eventDate = participantion.getEvent().getEventDate();
+        Participantion participation = participationRepository.getReferenceById(participationId);
+        LocalDateTime eventDate = participation.getEvent().getEventDate();
+
         List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
 
-        if(!userEventsIndexes.contains(participantion.getEvent().getId()))
+        if(!userEventsIndexes.contains(participation.getEvent().getId()))
             throw new EventHasNoAssociationWithUserException();
 
         if(LocalDate.now().isAfter(eventDate.toLocalDate()))
             throw new ExpiredEventException();
 
-        participantion.setParticiparionDate(LocalDate.now());
+        participation.setParticiparionDate(LocalDate.now());
 
-        return participationRepository.save(participantion);
+        return participationRepository.save(participation);
+    }
+
+    @Transactional
+    public void remove(Long participationId, Long userId){
+        User user = userRepository.getReferenceById(userId);
+        Participantion participation = participationRepository.getReferenceById(participationId);
+
+        List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
+
+        if(!userEventsIndexes.contains(participation.getEvent().getId()))
+            throw new EventHasNoAssociationWithUserException();
+
+        participationRepository.deleteById(participationId);
     }
 
 }

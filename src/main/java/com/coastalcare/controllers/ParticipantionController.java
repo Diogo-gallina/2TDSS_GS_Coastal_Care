@@ -27,10 +27,16 @@ public class ParticipantionController {
     }
 
     @PutMapping ("/{participation_id}/users/{user_id}")
-    ResponseEntity<ParticipationDetailsDTO> checkIn(@PathVariable("participation_id") Long participationId,
+    public ResponseEntity<ParticipationDetailsDTO> checkIn(@PathVariable("participation_id") Long participationId,
                                            @PathVariable("user_id") Long userId){
         Participantion participantion = participantionService.checkIn(participationId, userId);
         return ResponseEntity.ok(new ParticipationDetailsDTO(participantion));
     }
 
+    @DeleteMapping("/{participation_id}/users/{user_id}")
+    public ResponseEntity<Void> delete(@PathVariable("participation_id") Long participationId,
+                                                    @PathVariable("user_id") Long userId){
+        participantionService.remove(participationId, userId);
+        return ResponseEntity.noContent().build();
+    }
 }
