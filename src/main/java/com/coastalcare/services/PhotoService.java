@@ -1,9 +1,11 @@
 package com.coastalcare.services;
 
-import com.coastalcare.dto.Participation.ParticipationDetailsDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
+import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
+import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.models.Beach;
+import com.coastalcare.models.Participantion;
 import com.coastalcare.models.Photo;
 import com.coastalcare.models.User;
 import com.coastalcare.repositories.BeachRepository;
@@ -64,8 +66,33 @@ public class PhotoService {
         return new PageImpl<>(photoDetailsDTOs, page, photoDetailsDTOs.size());
     }
 
+    @Transactional
+    public Photo update(Long photoId, UpdatePhotoDTO photoDTO){
+        User user = userRepository.getReferenceById(photoDTO.userId());
+        Photo photo = photoRepository.getReferenceById(photoId);
+        checkPhotoAssociationWithUser(user, photo);
+
+        if(photoDTO.beachId() != null)
+            photo.setBeach(beachRepository.getReferenceById(photoDTO.beachId()));
+
+        if(!photoDTO.url().isEmpty())
+            photo.setUrl(photoDTO.url());
+
+        if(!photoDTO.url().isEmpty())
+            photo.setUrl(photoDTO.url());
+
+        return photoRepository.save(photo);
+    }
+
+    @Transactional
     public void delete(Long photoId) {
         photoRepository.deleteById(photoId);
+    }
+
+    private static void checkPhotoAssociationWithUser(User user, Photo photo){
+        List<Long> userPhotosIndexes = user.getPhotos().stream().map(Photo::getId).toList();
+        if(!userPhotosIndexes.contains(photo.getId()))
+            throw new EntityHasNoAssociationException("Foto não tem associação com esse usuário");
     }
 
 }

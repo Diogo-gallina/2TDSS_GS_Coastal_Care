@@ -58,7 +58,6 @@
 		</dependency>
 
 		<!--dotenv dependency-->
-
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>java-dotenv</artifactId>

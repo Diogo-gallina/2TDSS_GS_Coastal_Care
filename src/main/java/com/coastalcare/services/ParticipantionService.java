@@ -2,7 +2,7 @@ package com.coastalcare.services;
 
 import com.coastalcare.dto.Participation.ParticipationDetailsDTO;
 import com.coastalcare.dto.Participation.RegisterParticipationDTO;
-import com.coastalcare.infra.exceptions.EventHasNoAssociationWithUserException;
+import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.infra.exceptions.ExpiredEventException;
 import com.coastalcare.models.Event;
 import com.coastalcare.models.Participantion;
@@ -74,10 +74,10 @@ public class ParticipantionService {
         participationRepository.deleteById(participationId);
     }
 
-    public static void checkEventAssociationWithUser(User user, Participantion participation){
+    private static void checkEventAssociationWithUser(User user, Participantion participation){
         List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
         if(!userEventsIndexes.contains(participation.getEvent().getId()))
-            throw new EventHasNoAssociationWithUserException();
+            throw new EntityHasNoAssociationException("Evento não está associado com usuário, registre-se no evento antes de confirmar a presença");
     }
 
 }
