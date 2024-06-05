@@ -46,4 +46,16 @@ public class PhotoController {
         return ResponseEntity.ok(userPhotos);
     }
 
+    @GetMapping("beaches/{beach_id}")
+    public ResponseEntity<Page<PhotoDetailsDTO>> findAllBeachPhotos(@PathVariable("beach_id") Long beachId,
+                                                                   Pageable page){
+        var beachPhotos = photoService.getAllBeachPhotos(beachId, page);
+        return ResponseEntity.ok(beachPhotos);
+    }
+
+    @GetMapping("/{photo_id}")
+    public ResponseEntity<Void> delete(@PathVariable("photo_id") Long photoId){
+        photoService.delete(photoId);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -55,4 +55,17 @@ public class PhotoService {
         return new PageImpl<>(photoDetailsDTOs, page, photoDetailsDTOs.size());
     }
 
+    public Page<PhotoDetailsDTO> getAllBeachPhotos(Long beachId, Pageable page) {
+        Beach beach = beachRepository.getReferenceById(beachId);
+        List<PhotoDetailsDTO> photoDetailsDTOs = beach.getPhotos().stream()
+                .map(PhotoDetailsDTO::new)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(photoDetailsDTOs, page, photoDetailsDTOs.size());
+    }
+
+    public void delete(Long photoId) {
+        photoRepository.deleteById(photoId);
+    }
+
 }
