@@ -2,8 +2,10 @@ package com.coastalcare.services;
 
 import com.coastalcare.dto.user.CreateUserDTO;
 import com.coastalcare.dto.user.UserDetailsDTO;
+import com.coastalcare.dto.user.UserTypeCountDTO;
 import com.coastalcare.infra.exceptions.PasswordConfirmationException;
 import com.coastalcare.models.User;
+import com.coastalcare.models.enums.UserType;
 import com.coastalcare.repositories.UserRepository;
 import com.coastalcare.utils.PasswordUtil;
 import jakarta.transaction.Transactional;
@@ -12,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -36,6 +41,25 @@ public class UserService {
 
     public User getOne(Long userId) {
         return userRepository.getReferenceById(userId);
+    }
+
+    public Page<UserDetailsDTO> findByName(String name, Pageable page) {
+        return userRepository.findByName(name, page).map(UserDetailsDTO::new);
+    }
+
+    public Page<UserDetailsDTO> findByEmail(String email, Pageable page) {
+        return userRepository.findByEmail(email, page).map(UserDetailsDTO::new);
+    }
+
+    public Page<UserDetailsDTO> findByUserType(String type, Pageable page) {
+        return userRepository.findByUserType(type, page).map(UserDetailsDTO::new);
+    }
+
+    public List<UserTypeCountDTO> getUsersCountByType() {
+        var results = userRepository.countUsersByType();
+        return results.stream()
+                .map(result -> new UserTypeCountDTO((UserType) result[0], (Long) result[1]))
+                .toList();
     }
 
     @Transactional
