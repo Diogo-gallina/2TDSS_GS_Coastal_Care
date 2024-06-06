@@ -12,4 +12,7 @@ public interface EventRepository  extends JpaRepository<Event, Long> {
     @Query("from Event e where LOWER(e.name) like LOWER(CONCAT('%', :name, '%'))")
     Page<Event> findByName(@Param("name") String name, Pageable page);
 
+    @Query("from Event e where LOWER(e.status) = LOWER(:status)")
+    Page<Event> findByStatus(@Param("status") String status, Pageable page);
+
 }

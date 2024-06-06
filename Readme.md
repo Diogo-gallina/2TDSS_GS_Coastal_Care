@@ -22,6 +22,8 @@
 | Event         | /events/                                       | POST       | Cria um evento                                                      |
 | Event         | /events                                        | GET        | Busca todos os eventos                                              |
 | Event         | /events/:event_id                              | GET        | Busca evento pelo ID                                                |
+| Event         | /events/by-name                                | GET        | Busca todos os eventos por pate do nome                             |
+| Event         | /events/by-status                              | GET        | Busca todos os eventos por status                                   |
 | Event         | /events/:event_id                              | PUT        | Atualiza um evento                                                  |
 | Event         | /events/:event_id                              | DELETE     | Deleta um evento                                                    |
 | Participation | /participations                                | POST       | Registra usuário em um evento                                       |

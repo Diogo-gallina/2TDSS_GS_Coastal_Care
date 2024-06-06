@@ -48,6 +48,13 @@ public class EventCotroller {
         return ResponseEntity.ok(events);
     }
 
+    @GetMapping("/by-status")
+    public ResponseEntity<Page<EventDetailsDTO>> findByStatus(@RequestParam("status") String status,
+                                                            Pageable page) {
+        var events = eventService.findByStatus(status, page);
+        return ResponseEntity.ok(events);
+    }
+
     @PutMapping("/{event_id}")
     public ResponseEntity<EventDetailsDTO> update(@PathVariable("event_id") Long eventId,
                                                   @RequestBody @Valid UpdateEventDTO eventDTO) {

@@ -52,6 +52,11 @@ public class EventService {
                 .map(EventDetailsDTO::new);
     }
 
+    public Page<EventDetailsDTO> findByStatus(String name, Pageable page) {
+        return eventRepository.findByStatus(name, page)
+                .map(EventDetailsDTO::new);
+    }
+
     public Event update(Long eventId, UpdateEventDTO eventDTO) {
         Event event = eventRepository.getReferenceById(eventId);
 
