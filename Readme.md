@@ -1,5 +1,15 @@
 # CoastalCare
 
+## Sobre o Aplicativo
+
+No âmbito das tecnologias para monitoramento e conservação marinha, estamos desenvolvendo uma solução inovadora que visa engajar a comunidade e utilizar inteligência artificial para promover a limpeza e a preservação das praias. O projeto consiste em um aplicativo que integra voluntários e cidadãos interessados em reportar a poluição marinha através de fotografias. Esta abordagem colaborativa não apenas facilita o monitoramento das condições das praias, mas também estimula a participação ativa na conservação do meio ambiente.
+
+Nossa solução contempla dois tipos de usuários: voluntários que se dispõem a participar de eventos de limpeza das praias e cidadãos que registram a poluição através de fotos. Essas imagens são avaliadas por um modelo de inteligência artificial que classifica e compara as praias com base nos níveis de poluição. A tecnologia utilizada permite identificar e categorizar os tipos de lixo, como plásticos, óleo, plantas marinhas e vida marinha em risco, além de avaliar a gravidade da situação em níveis alto, médio e baixo.
+
+Ao coletar e analisar dados fotográficos, o aplicativo oferece aos usuários informações precisas sobre as praias mais próximas que necessitam de atenção. Através dessa funcionalidade, pretendemos organizar eventos de limpeza, reunindo voluntários para ações coordenadas e eficazes. A integração de dados de localização e classificação permite que as ações sejam direcionadas de forma estratégica, garantindo maior impacto e eficiência na remoção de resíduos.
+
+Além disso, o aplicativo visa fomentar uma rede de colaboração e conscientização ambiental. Ao proporcionar uma plataforma onde as pessoas podem contribuir ativamente para a redução da poluição marinha, estamos criando um movimento de preservação que transcende o uso da tecnologia. A combinação de monitoramento preciso e mobilização comunitária torna nossa solução uma ferramenta poderosa para enfrentar os desafios da poluição marinha e promover a sustentabilidade dos ecossistemas costeiros.
+
 ## Diagrama Entidade Relacionamento (DER)
 ![DER.png](doc-images/DER.png)
 
