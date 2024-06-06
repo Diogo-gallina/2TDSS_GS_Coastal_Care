@@ -64,7 +64,7 @@ public class EventService {
         List<Object[]> results = eventRepository.countEventsByStatus();
         return results.stream()
                 .map(result -> new EventStatusCountDTO((EventStatus) result[0], (Long) result[1]))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Event update(Long eventId, UpdateEventDTO eventDTO) {

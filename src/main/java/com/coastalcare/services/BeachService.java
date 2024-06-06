@@ -52,7 +52,7 @@ public class BeachService {
         List<Object[]> results = beachRepository.countBeachesByPollutionLevel();
         return results.stream()
                 .map(result -> new PollutionLevelCountDTO((PollutionLevel) result[0], (Long) result[1]))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional
