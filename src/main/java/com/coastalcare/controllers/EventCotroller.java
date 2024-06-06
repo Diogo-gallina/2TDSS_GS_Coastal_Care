@@ -2,6 +2,7 @@ package com.coastalcare.controllers;
 
 import com.coastalcare.dto.event.CreateEventDTO;
 import com.coastalcare.dto.event.EventDetailsDTO;
+import com.coastalcare.dto.event.EventStatusCountDTO;
 import com.coastalcare.dto.event.UpdateEventDTO;
 import com.coastalcare.models.Event;
 import com.coastalcare.services.EventService;
@@ -13,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -53,6 +56,12 @@ public class EventCotroller {
                                                             Pageable page) {
         var events = eventService.findByStatus(status, page);
         return ResponseEntity.ok(events);
+    }
+
+    @GetMapping("/by-status-count")
+    public ResponseEntity<List<EventStatusCountDTO>> getEventCountByStatus() {
+        var groupEvents = eventService.getEventCountByStatus();
+        return ResponseEntity.ok(groupEvents);
     }
 
     @PutMapping("/{event_id}")

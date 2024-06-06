@@ -1,6 +1,5 @@
 package com.coastalcare.repositories;
 
-import com.coastalcare.dto.beach.PollutionLevelCountDTO;
 import com.coastalcare.models.Beach;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
