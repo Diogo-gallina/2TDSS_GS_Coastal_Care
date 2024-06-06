@@ -51,7 +51,7 @@ public class User {
     private List<Event> events;
 
     @OneToMany(mappedBy = "user")
-    private List<Participantion> participantions;
+    private List<Participation> participations;
 
     @OneToMany(mappedBy = "user")
     private List<Photo> photos;

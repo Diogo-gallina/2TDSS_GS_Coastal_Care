@@ -53,7 +53,7 @@ public class Event {
     private User user;
 
     @OneToMany(mappedBy = "event")
-    private List<Participantion> participantions;
+    private List<Participation> participations;
 
     @ManyToOne
     @JoinColumn(name = "beach_id")

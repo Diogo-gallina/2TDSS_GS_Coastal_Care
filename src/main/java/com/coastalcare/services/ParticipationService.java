@@ -5,7 +5,7 @@ import com.coastalcare.dto.Participation.RegisterParticipationDTO;
 import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.infra.exceptions.ExpiredEventException;
 import com.coastalcare.models.Event;
-import com.coastalcare.models.Participantion;
+import com.coastalcare.models.Participation;
 import com.coastalcare.models.User;
 import com.coastalcare.repositories.EventRepository;
 import com.coastalcare.repositories.ParticipationRepository;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ParticipantionService {
+public class ParticipationService {
 
     @Autowired
     ParticipationRepository participationRepository;
@@ -33,18 +33,18 @@ public class ParticipantionService {
     EventRepository eventRepository;
 
     @Transactional
-    public Participantion register(RegisterParticipationDTO participationDTO) {
+    public Participation register(RegisterParticipationDTO participationDTO) {
         User user = userRepository.getReferenceById(participationDTO.userId());
         Event event = eventRepository.getReferenceById(participationDTO.eventId());
-        Participantion participantion = new Participantion(user, event);
+        Participation participation = new Participation(user, event);
 
-        return participationRepository.save(participantion);
+        return participationRepository.save(participation);
     }
 
     @Transactional
-    public Participantion checkIn(Long participationId, Long userId){
+    public Participation checkIn(Long participationId, Long userId){
         User user = userRepository.getReferenceById(userId);
-        Participantion participation = participationRepository.getReferenceById(participationId);
+        Participation participation = participationRepository.getReferenceById(participationId);
         LocalDateTime eventDate = participation.getEvent().getEventDate();
         checkEventAssociationWithUser(user, participation);
 
@@ -58,7 +58,7 @@ public class ParticipantionService {
 
     public Page<ParticipationDetailsDTO> getAllUserParticipations(Long userId, Pageable page) {
         User user = userRepository.getReferenceById(userId);
-        List<ParticipationDetailsDTO> participationDetailsDTOs = user.getParticipantions().stream()
+        List<ParticipationDetailsDTO> participationDetailsDTOs = user.getParticipations().stream()
                 .map(ParticipationDetailsDTO::new)
                 .collect(Collectors.toList());
 
@@ -68,13 +68,13 @@ public class ParticipantionService {
     @Transactional
     public void remove(Long participationId, Long userId){
         User user = userRepository.getReferenceById(userId);
-        Participantion participation = participationRepository.getReferenceById(participationId);
+        Participation participation = participationRepository.getReferenceById(participationId);
         checkEventAssociationWithUser(user, participation);
 
         participationRepository.deleteById(participationId);
     }
 
-    private static void checkEventAssociationWithUser(User user, Participantion participation){
+    private static void checkEventAssociationWithUser(User user, Participation participation){
         List<Long> userEventsIndexes = user.getEvents().stream().map(Event::getId).toList();
         if(!userEventsIndexes.contains(participation.getEvent().getId()))
             throw new EntityHasNoAssociationException("Evento não está associado com usuário, registre-se no evento antes de confirmar a presença");

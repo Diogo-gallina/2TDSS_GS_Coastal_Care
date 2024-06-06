@@ -1,6 +1,6 @@
 package com.coastalcare.dto.Participation;
 
-import com.coastalcare.models.Participantion;
+import com.coastalcare.models.Participation;
 
 import java.time.LocalDate;
 
@@ -12,13 +12,13 @@ public record ParticipationDetailsDTO(
         LocalDate createdAt
 ) {
 
-    public ParticipationDetailsDTO(Participantion participantion){
+    public ParticipationDetailsDTO(Participation participation){
         this(
-                participantion.getId(),
-                participantion.getUser().getId(),
-                participantion.getEvent().getId(),
-                participantion.getParticiparionDate(),
-                participantion.getCreatedAt()
+                participation.getId(),
+                participation.getUser().getId(),
+                participation.getEvent().getId(),
+                participation.getParticiparionDate(),
+                participation.getCreatedAt()
         );
     }
 
