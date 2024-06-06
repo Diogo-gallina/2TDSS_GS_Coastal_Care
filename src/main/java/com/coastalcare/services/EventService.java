@@ -2,6 +2,7 @@ package com.coastalcare.services;
 
 import com.coastalcare.dto.event.CreateEventDTO;
 import com.coastalcare.dto.event.EventDetailsDTO;
+import com.coastalcare.dto.event.EventStatusCountDTO;
 import com.coastalcare.dto.event.UpdateEventDTO;
 import com.coastalcare.models.Beach;
 import com.coastalcare.models.Event;
@@ -17,6 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -45,6 +48,23 @@ public class EventService {
 
     public Event getOne(Long eventId) {
         return eventRepository.getReferenceById(eventId);
+    }
+
+    public Page<EventDetailsDTO> findByName(String name, Pageable page) {
+        return eventRepository.findByName(name, page)
+                .map(EventDetailsDTO::new);
+    }
+
+    public Page<EventDetailsDTO> findByStatus(String status, Pageable page) {
+        return eventRepository.findByStatus(status, page)
+                .map(EventDetailsDTO::new);
+    }
+
+    public List<EventStatusCountDTO> getEventCountByStatus() {
+        List<Object[]> results = eventRepository.countEventsByStatus();
+        return results.stream()
+                .map(result -> new EventStatusCountDTO((EventStatus) result[0], (Long) result[1]))
+                .toList();
     }
 
     public Event update(Long eventId, UpdateEventDTO eventDTO) {

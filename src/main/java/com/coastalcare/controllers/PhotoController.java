@@ -1,5 +1,6 @@
 package com.coastalcare.controllers;
 
+import com.coastalcare.dto.photo.PhotoClassificationCountDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
 import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/photos")
@@ -40,19 +43,26 @@ public class PhotoController {
         return ResponseEntity.ok(new PhotoDetailsDTO(photo));
     }
 
-    @GetMapping("users/{user_id}")
+    @GetMapping("/users/{user_id}")
     public ResponseEntity<Page<PhotoDetailsDTO>> findAllUserPhotos(@PathVariable("user_id") Long userId,
                                                              Pageable page){
         var userPhotos = photoService.getAllUserPhotos(userId, page);
         return ResponseEntity.ok(userPhotos);
     }
 
-    @GetMapping("beaches/{beach_id}")
+    @GetMapping("/beaches/{beach_id}")
     public ResponseEntity<Page<PhotoDetailsDTO>> findAllBeachPhotos(@PathVariable("beach_id") Long beachId,
                                                                    Pageable page){
         var beachPhotos = photoService.getAllBeachPhotos(beachId, page);
         return ResponseEntity.ok(beachPhotos);
     }
+
+    @GetMapping("/by-classification-count")
+    public ResponseEntity<List<PhotoClassificationCountDTO>> getClassificationCount(){
+        var classificationCount = photoService.getClassificationCount();
+        return ResponseEntity.ok(classificationCount);
+    }
+
 
     @PutMapping("/{photo_id}")
     public ResponseEntity<PhotoDetailsDTO> update(@PathVariable("photo_id") Long photoId,
