@@ -1,5 +1,6 @@
 package com.coastalcare.services;
 
+import com.coastalcare.dto.photo.PhotoClassificationCountDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
 import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
@@ -8,6 +9,7 @@ import com.coastalcare.models.Beach;
 import com.coastalcare.models.Participantion;
 import com.coastalcare.models.Photo;
 import com.coastalcare.models.User;
+import com.coastalcare.models.enums.ClassificationPhoto;
 import com.coastalcare.repositories.BeachRepository;
 import com.coastalcare.repositories.PhotoRepository;
 import com.coastalcare.repositories.UserRepository;
@@ -64,6 +66,13 @@ public class PhotoService {
                 .collect(Collectors.toList());
 
         return new PageImpl<>(photoDetailsDTOs, page, photoDetailsDTOs.size());
+    }
+
+    public List<PhotoClassificationCountDTO> getClassificationCount(){
+        var results = photoRepository.countPhotosByClassification();
+        return results.stream()
+                .map(result -> new PhotoClassificationCountDTO((ClassificationPhoto) result[0], (Long) result[1]))
+                .collect(Collectors.toList());
     }
 
     @Transactional
