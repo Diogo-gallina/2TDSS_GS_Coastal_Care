@@ -41,6 +41,13 @@ public class EventCotroller {
         return ResponseEntity.ok(new EventDetailsDTO((event)));
     }
 
+    @GetMapping("/by-name")
+    public ResponseEntity<Page<EventDetailsDTO>> findByName(@RequestParam("name") String name,
+                                                            Pageable page) {
+        var events = eventService.findByName(name, page);
+        return ResponseEntity.ok(events);
+    }
+
     @PutMapping("/{event_id}")
     public ResponseEntity<EventDetailsDTO> update(@PathVariable("event_id") Long eventId,
                                                   @RequestBody @Valid UpdateEventDTO eventDTO) {

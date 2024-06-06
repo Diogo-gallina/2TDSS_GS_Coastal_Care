@@ -47,6 +47,11 @@ public class EventService {
         return eventRepository.getReferenceById(eventId);
     }
 
+    public Page<EventDetailsDTO> findByName(String name, Pageable page) {
+        return eventRepository.findByName(name, page)
+                .map(EventDetailsDTO::new);
+    }
+
     public Event update(Long eventId, UpdateEventDTO eventDTO) {
         Event event = eventRepository.getReferenceById(eventId);
 
