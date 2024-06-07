@@ -19,7 +19,8 @@ public class ErrorHandler {
             ExpiredEventException.class,
             EntityHasNoAssociationException.class,
             AddressInfoNotFoundException.class,
-            InvalidImageFileException.class
+            InvalidImageFileException.class,
+            FailUploadedImageToS3Exception.class
     })
     public ResponseEntity<Void> error400(){
         return ResponseEntity.badRequest().build();
