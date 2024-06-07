@@ -2,10 +2,12 @@ package com.coastalcare.utils;
 
 import com.coastalcare.dto.geocoder.GeocodeLatLgnResponseDTO;
 import com.coastalcare.infra.exceptions.AddressInfoNotFoundException;
+import com.coastalcare.models.Beach;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +35,23 @@ public class Geocoder {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String parseCoordinateToAddress(Double latitude, Double longitude) {
+        try {
+            LatLng location = new LatLng(latitude, longitude);
+            GeocodingResult[] results = GeocodingApi.reverseGeocode(context, location).await();
+            if (results != null && results.length > 0)
+                return results[0].formattedAddress;
+            throw new AddressInfoNotFoundException("Não foi possível encontrar informações do endereço com as cordenadas inseridas");
+        } catch (ApiException | InterruptedException | IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }
