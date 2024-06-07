@@ -2,6 +2,7 @@ package com.coastalcare.models;
 
 import com.coastalcare.dto.beach.CreateBeachDTO;
 import com.coastalcare.models.enums.PollutionLevel;
+import com.coastalcare.utils.Geocoder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,10 +31,10 @@ public class Beach {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "latitude", nullable = false)
+    @Column(name = "latitude", nullable = false, precision = 10)
     private Double latitude;
 
-    @Column(name = "longitude", nullable = false)
+    @Column(name = "longitude", nullable = false, precision = 10)
     private Double longitude;
 
     @Enumerated(EnumType.STRING)
@@ -58,5 +59,9 @@ public class Beach {
         this.pollutionLevel = beachDTO.pollutionLevel();
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getAddress(Double latitude, Double longitude) {
+        return Geocoder.parseCoordinateToAddress(latitude, longitude);
     }
 }
