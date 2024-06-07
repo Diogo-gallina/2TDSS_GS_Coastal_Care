@@ -1,6 +1,6 @@
 package com.coastalcare.infra;
 
-import com.coastalcare.infra.exceptions.AddressInfoNotFound;
+import com.coastalcare.infra.exceptions.AddressInfoNotFoundException;
 import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.infra.exceptions.ExpiredEventException;
 import com.coastalcare.infra.exceptions.PasswordConfirmationException;
@@ -21,7 +21,7 @@ public class ErrorHandler {
             PasswordConfirmationException.class,
             ExpiredEventException.class,
             EntityHasNoAssociationException.class,
-            AddressInfoNotFound.class
+            AddressInfoNotFoundException.class
     })
     public ResponseEntity<Void> error400(){
         return ResponseEntity.badRequest().build();
