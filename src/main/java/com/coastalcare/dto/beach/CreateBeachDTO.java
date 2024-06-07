@@ -11,11 +11,9 @@ public record CreateBeachDTO(
         @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
         String name,
 
-        @NotNull(message = "Latitude não pode ser vazia")
-        Long latitude,
-
-        @NotNull(message = "Longitude não pode ser vazia")
-        Long longitude,
+        @NotBlank(message = "Endereço próximo não pode ser vazio")
+        @Size(max = 150, message = "Endereço próximo ter no máximo 150 caracteres")
+        String nearbyAddress,
 
         @NotNull(message = "Nível de poluição não pode ser vazio")
         PollutionLevel pollutionLevel

@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public record BeachDetailsDTO (
         Long id,
         String name,
-        Long latitude,
-        Long longitude,
+        Double latitude,
+        Double longitude,
         PollutionLevel pollutionLevel,
         LocalDate createdAt,
         LocalDate updatedAt

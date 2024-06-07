@@ -1,4 +1,4 @@
-package com.coastalcare.dto.Participation;
+package com.coastalcare.dto.participation;
 
 import jakarta.validation.constraints.NotNull;
 

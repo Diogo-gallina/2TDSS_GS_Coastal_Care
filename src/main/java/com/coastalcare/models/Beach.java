@@ -31,10 +31,10 @@ public class Beach {
     private String name;
 
     @Column(name = "latitude", nullable = false)
-    private Long latitude;
+    private Double latitude;
 
     @Column(name = "longitude", nullable = false)
-    private Long longitude;
+    private Double longitude;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "pollution_level", nullable = false)
@@ -53,10 +53,10 @@ public class Beach {
     @OneToMany(mappedBy = "beach")
     private List<Photo> photos;
 
-    public Beach(CreateBeachDTO beachDTO) {
-        name = beachDTO.name();
-        latitude = beachDTO.latitude();
-        longitude = beachDTO.longitude();
-        pollutionLevel = beachDTO.pollutionLevel();
+    public Beach(CreateBeachDTO beachDTO, Double latitude, Double longitude) {
+        this.name = beachDTO.name();
+        this.pollutionLevel = beachDTO.pollutionLevel();
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }

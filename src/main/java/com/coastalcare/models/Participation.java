@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "GS_2TDSS_PARTICIPATION")
 @EntityListeners(AuditingEntityListener.class)
-public class Participantion {
+public class Participation {
 
     @Id
     @GeneratedValue
@@ -39,7 +39,7 @@ public class Participantion {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    public Participantion(User user, Event event) {
+    public Participation(User user, Event event) {
         this.user = user;
         this.event = event;
     }

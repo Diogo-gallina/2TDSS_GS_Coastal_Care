@@ -4,9 +4,11 @@ import com.coastalcare.dto.beach.BeachDetailsDTO;
 import com.coastalcare.dto.beach.CreateBeachDTO;
 import com.coastalcare.dto.beach.PollutionLevelCountDTO;
 import com.coastalcare.dto.beach.UpdateBeachDTO;
+import com.coastalcare.dto.geocoder.GeocodeLatLgnResponseDTO;
 import com.coastalcare.models.Beach;
 import com.coastalcare.models.enums.PollutionLevel;
 import com.coastalcare.repositories.BeachRepository;
+import com.coastalcare.utils.Geocoder;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +27,8 @@ public class BeachService {
 
     @Transactional
     public Beach create(CreateBeachDTO beachDTO) {
-        Beach beach = new Beach(beachDTO);
+        GeocodeLatLgnResponseDTO coordinate = Geocoder.parseAddressToCoordinate(beachDTO.nearbyAddress());
+        Beach beach = new Beach(beachDTO, coordinate.latitude(), coordinate.longitude());
         return beachRepository.save(beach);
     }
 

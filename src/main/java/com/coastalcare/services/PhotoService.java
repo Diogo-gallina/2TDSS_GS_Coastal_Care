@@ -6,7 +6,6 @@ import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
 import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.models.Beach;
-import com.coastalcare.models.Participantion;
 import com.coastalcare.models.Photo;
 import com.coastalcare.models.User;
 import com.coastalcare.models.enums.ClassificationPhoto;
