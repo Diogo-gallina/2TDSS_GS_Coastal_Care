@@ -1,7 +1,7 @@
 package com.coastalcare.controllers;
 
-import com.coastalcare.dto.Participation.ParticipationDetailsDTO;
-import com.coastalcare.dto.Participation.RegisterParticipationDTO;
+import com.coastalcare.dto.participation.ParticipationDetailsDTO;
+import com.coastalcare.dto.participation.RegisterParticipationDTO;
 import com.coastalcare.models.Participation;
 import com.coastalcare.services.ParticipationService;
 import jakarta.validation.Valid;

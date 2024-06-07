@@ -1,7 +1,7 @@
 package com.coastalcare.services;
 
-import com.coastalcare.dto.Participation.ParticipationDetailsDTO;
-import com.coastalcare.dto.Participation.RegisterParticipationDTO;
+import com.coastalcare.dto.participation.ParticipationDetailsDTO;
+import com.coastalcare.dto.participation.RegisterParticipationDTO;
 import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.infra.exceptions.ExpiredEventException;
 import com.coastalcare.models.Event;
