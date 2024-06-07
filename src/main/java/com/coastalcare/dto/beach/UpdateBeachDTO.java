@@ -11,10 +11,10 @@ public record UpdateBeachDTO (
         String name,
 
         @NotNull(message = "Latitude não pode ser vazia")
-        Long latitude,
+        Double latitude,
 
         @NotNull(message = "Longitude não pode ser vazia")
-        Long longitude,
+        Double longitude,
 
         @NotNull(message = "Nível de poluição não pode ser vazio")
         PollutionLevel pollutionLevel
