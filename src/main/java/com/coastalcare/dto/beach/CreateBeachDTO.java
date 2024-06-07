@@ -12,7 +12,7 @@ public record CreateBeachDTO(
         String name,
 
         @NotBlank(message = "Endereço próximo não pode ser vazio")
-        @Size(max = 150, message = "Endereço próximo ter no máximo 150 caracteres")
+        @Size(max = 150, message = "Endereço próximo deve ter no máximo 150 caracteres")
         String nearbyAddress,
 
         @NotNull(message = "Nível de poluição não pode ser vazio")

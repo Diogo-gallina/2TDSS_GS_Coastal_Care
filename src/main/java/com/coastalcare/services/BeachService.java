@@ -61,11 +61,19 @@ public class BeachService {
     @Transactional
     public BeachDetailsDTO update(Long beachId, UpdateBeachDTO beachDTO) {
         Beach beach = beachRepository.getReferenceById(beachId);
+        GeocodeLatLgnResponseDTO coordinate = Geocoder.parseAddressToCoordinate(beachDTO.nearbyAddress());
 
-        beach.setName(beachDTO.name());
-        beach.setLatitude(beachDTO.latitude());
-        beach.setLongitude(beachDTO.longitude());
-        beach.setPollutionLevel(beachDTO.pollutionLevel());
+        if (!beachDTO.nearbyAddress().isEmpty()){
+            beach.setLatitude(coordinate.latitude());
+            beach.setLongitude(coordinate.longitude());
+        }
+
+        if (!beachDTO.name().isEmpty())
+            beach.setName(beachDTO.name());
+
+        if (beachDTO.pollutionLevel() != null)
+            beach.setPollutionLevel(beachDTO.pollutionLevel());
+
         beach.setUpdatedAt(LocalDate.now());
 
         return new BeachDetailsDTO(beach);
