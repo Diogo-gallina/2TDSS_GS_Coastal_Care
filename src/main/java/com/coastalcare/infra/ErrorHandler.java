@@ -26,4 +26,9 @@ public class ErrorHandler {
         return ResponseEntity.badRequest().build();
     }
 
+    @ExceptionHandler(FailAwsConnectException.class)
+    public ResponseEntity<Void> error500(){
+        return ResponseEntity.internalServerError().build();
+    }
+
 }
