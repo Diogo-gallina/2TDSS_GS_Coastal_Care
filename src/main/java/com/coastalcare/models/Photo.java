@@ -46,8 +46,8 @@ public class Photo {
     @JoinColumn(name = "beach_id")
     private Beach beach;
 
-    public Photo(UploadPhotoDTO photoDTO, User user, Beach beach) {
-        this.url = photoDTO.url();
+    public Photo(UploadPhotoDTO photoDTO, User user, Beach beach, String imageUrl) {
+        this.url = imageUrl;
         this.classification = photoDTO.classification();
         this.user = user;
         this.beach = beach;
