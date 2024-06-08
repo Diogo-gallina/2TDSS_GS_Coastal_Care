@@ -2,7 +2,6 @@ package com.coastalcare.services;
 
 import com.coastalcare.dto.photo.PhotoClassificationCountDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
-import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
 import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.models.Beach;
@@ -74,24 +73,6 @@ public class PhotoService {
         return results.stream()
                 .map(result -> new PhotoClassificationCountDTO((ClassificationPhoto) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
-    }
-
-    @Transactional
-    public Photo update(Long photoId, UpdatePhotoDTO photoDTO){
-        User user = userRepository.getReferenceById(photoDTO.userId());
-        Photo photo = photoRepository.getReferenceById(photoId);
-        checkPhotoAssociationWithUser(user, photo);
-
-        if(photoDTO.beachId() != null)
-            photo.setBeach(beachRepository.getReferenceById(photoDTO.beachId()));
-
-        if(!photoDTO.url().isEmpty())
-            photo.setUrl(photoDTO.url());
-
-        if(!photoDTO.url().isEmpty())
-            photo.setUrl(photoDTO.url());
-
-        return photoRepository.save(photo);
     }
 
     @Transactional
