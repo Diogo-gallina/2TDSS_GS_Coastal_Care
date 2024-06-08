@@ -25,7 +25,9 @@ Além disso, o aplicativo visa fomentar uma rede de colaboração e conscientiza
 
 ## Diagrama de classes
 ![DER.png](doc-images/class_diagram.svg)
-n
+
+## Swagger
+A documentação do swagger pode ser encontrada no seguinte endereço: http://localhost:{PORT}/swagger-ui.html
 
 ## Rotas
 | **Recurso**   | **Rota**                                       | **Método** | **Descrição**                                                       |
@@ -65,6 +67,5 @@ n
 | Photo         | /photos/:beach_id                              | GET        | Busca todas as fotos de uma praia                                   |
 | Photo         | /photos/:user_id                               | GET        | Busca todas as fotos que um usuário adicionou                       |
 | Photo         | /photos/by-classification-count                | GET        | Agrupa por classificação da foto                                    |
-| Photo         | /photos/:photo_id                              | PUT        | Atualiza uma foto                                                   |
 | Photo         | /photos/:photo_id                              | DELETE     | Deleta uma foto pelo id                                             |
 
