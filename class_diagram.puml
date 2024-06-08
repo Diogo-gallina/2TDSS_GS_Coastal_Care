@@ -1,0 +1,65 @@
+@startuml
+class Beach {
+- Long id
+- String name
+- Double latitude
+- Double longitude
+- enums.PollutionLevel pollutionLevel
+- LocalDate createdAt
+- LocalDate updatedAt
+- List<Event> events
+- List<Photo> photos
++ String getAddress(Double,Double)
+}
+
+class Event {
+- Long id
+- String name
+- LocalDateTime eventDate
+- String description
+- enums.EventStatus status
+- LocalDate createdAt
+- LocalDate updatedAt
+- User user
+- List<Participation> participations
+- Beach beach
+}
+
+class Participation {
+- Long id
+- LocalDate participationDate
+- LocalDate createdAt
+- User user
+- Event event
+}
+
+class Photo {
+- Long id
+- String url
+- enums.ClassificationPhoto classification
+- LocalDate uploadedDate
+- User user
+- Beach beach
+}
+
+class User {
+- Long id
+- String name
+- String email
+- String password
+- enums.UserType userType
+- LocalDate createdAt
+- LocalDate updatedAt
+- List<Event> events
+- List<Participation> participations
+- List<Photo> photos
+}
+
+
+User "1" -- "n" Photo
+User "1" -- "n" Participation
+User "1" -- "n" Event
+Participation "n" -- "1" Event
+Event "n" -- "1" Beach
+Beach "1" -- "n" Photo
+@enduml

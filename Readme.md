@@ -1,5 +1,12 @@
 # CoastalCare
 
+## Colaboradores:
+- Diogo Gallina – RM98605
+- Pedro Archila – RM550450
+- Pedro Couto - RM98402
+- Rafael Kanfler - RM99791
+- João Dubas - RM76153
+
 ## Sobre o Aplicativo
 
 No âmbito das tecnologias para monitoramento e conservação marinha, estamos desenvolvendo uma solução inovadora que visa engajar a comunidade e utilizar inteligência artificial para promover a limpeza e a preservação das praias. O projeto consiste em um aplicativo que integra voluntários e cidadãos interessados em reportar a poluição marinha através de fotografias. Esta abordagem colaborativa não apenas facilita o monitoramento das condições das praias, mas também estimula a participação ativa na conservação do meio ambiente.
@@ -10,8 +17,17 @@ Ao coletar e analisar dados fotográficos, o aplicativo oferece aos usuários in
 
 Além disso, o aplicativo visa fomentar uma rede de colaboração e conscientização ambiental. Ao proporcionar uma plataforma onde as pessoas podem contribuir ativamente para a redução da poluição marinha, estamos criando um movimento de preservação que transcende o uso da tecnologia. A combinação de monitoramento preciso e mobilização comunitária torna nossa solução uma ferramenta poderosa para enfrentar os desafios da poluição marinha e promover a sustentabilidade dos ecossistemas costeiros.
 
+### Video Pitch - Link
+- https://www.youtube.com/watch?v=jobwEEUnBkk
+
 ## Diagrama Entidade Relacionamento (DER)
-![DER.png](doc-images/DER.png)
+![img.png](doc-images/DER.png)
+
+## Diagrama de classes
+![DER.png](doc-images/class_diagram.svg)
+
+## Swagger
+A documentação do swagger pode ser encontrada no seguinte endereço: http://localhost:{PORT}/swagger-ui.html
 
 ## Rotas
 | **Recurso**   | **Rota**                                       | **Método** | **Descrição**                                                       |
@@ -51,6 +67,5 @@ Além disso, o aplicativo visa fomentar uma rede de colaboração e conscientiza
 | Photo         | /photos/:beach_id                              | GET        | Busca todas as fotos de uma praia                                   |
 | Photo         | /photos/:user_id                               | GET        | Busca todas as fotos que um usuário adicionou                       |
 | Photo         | /photos/by-classification-count                | GET        | Agrupa por classificação da foto                                    |
-| Photo         | /photos/:photo_id                              | PUT        | Atualiza uma foto                                                   |
 | Photo         | /photos/:photo_id                              | DELETE     | Deleta uma foto pelo id                                             |
 

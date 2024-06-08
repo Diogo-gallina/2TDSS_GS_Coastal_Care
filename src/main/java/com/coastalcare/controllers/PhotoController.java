@@ -2,16 +2,16 @@ package com.coastalcare.controllers;
 
 import com.coastalcare.dto.photo.PhotoClassificationCountDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
-import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
 import com.coastalcare.models.Photo;
+import com.coastalcare.models.enums.ClassificationPhoto;
 import com.coastalcare.services.PhotoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
@@ -24,9 +24,13 @@ public class PhotoController {
     PhotoService photoService;
 
     @PostMapping
-    public ResponseEntity<PhotoDetailsDTO> upload(@RequestBody @Valid UploadPhotoDTO photoDTO,
+    public ResponseEntity<PhotoDetailsDTO> upload(
+            @RequestParam("userId") Long userId,
+            @RequestParam("beachId") Long beachId,
+            @RequestParam("imageFile") MultipartFile imageFile,
+            @RequestParam("classification") ClassificationPhoto classification,
                                                   UriComponentsBuilder uri){
-        Photo photo = photoService.upload(photoDTO);
+        Photo photo = photoService.upload(new UploadPhotoDTO(userId, beachId, classification), imageFile);
         var url = uri.path("/photos/{photo_id}").buildAndExpand(photo.getId()).toUri();
         return ResponseEntity.created(url).body(new PhotoDetailsDTO(photo));
     }
@@ -63,13 +67,6 @@ public class PhotoController {
         return ResponseEntity.ok(classificationCount);
     }
 
-
-    @PutMapping("/{photo_id}")
-    public ResponseEntity<PhotoDetailsDTO> update(@PathVariable("photo_id") Long photoId,
-                                                  @RequestBody @Valid UpdatePhotoDTO photoDTO){
-        Photo photo = photoService.update(photoId, photoDTO);
-        return ResponseEntity.ok(new PhotoDetailsDTO(photo));
-    }
 
     @DeleteMapping("/{photo_id}")
     public ResponseEntity<Void> delete(@PathVariable("photo_id") Long photoId){

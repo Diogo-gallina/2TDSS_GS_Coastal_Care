@@ -2,7 +2,6 @@ package com.coastalcare.services;
 
 import com.coastalcare.dto.photo.PhotoClassificationCountDTO;
 import com.coastalcare.dto.photo.PhotoDetailsDTO;
-import com.coastalcare.dto.photo.UpdatePhotoDTO;
 import com.coastalcare.dto.photo.UploadPhotoDTO;
 import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
 import com.coastalcare.models.Beach;
@@ -12,12 +11,14 @@ import com.coastalcare.models.enums.ClassificationPhoto;
 import com.coastalcare.repositories.BeachRepository;
 import com.coastalcare.repositories.PhotoRepository;
 import com.coastalcare.repositories.UserRepository;
+import com.coastalcare.utils.S3ImageUploader;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,11 +34,11 @@ public class PhotoService {
     BeachRepository beachRepository;
 
     @Transactional
-    public Photo upload(UploadPhotoDTO photoDTO) {
+    public Photo upload(UploadPhotoDTO photoDTO, MultipartFile imageFile) {
         User user = userRepository.getReferenceById(photoDTO.userId());
         Beach beach = beachRepository.getReferenceById(photoDTO.beachId());
-        Photo photo = new Photo(photoDTO, user, beach);
-
+        String imageUrl = S3ImageUploader.uploadImageToS3(imageFile);
+        Photo photo = new Photo(photoDTO, user, beach, imageUrl);
         return photoRepository.save(photo);
     }
 
@@ -72,24 +73,6 @@ public class PhotoService {
         return results.stream()
                 .map(result -> new PhotoClassificationCountDTO((ClassificationPhoto) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
-    }
-
-    @Transactional
-    public Photo update(Long photoId, UpdatePhotoDTO photoDTO){
-        User user = userRepository.getReferenceById(photoDTO.userId());
-        Photo photo = photoRepository.getReferenceById(photoId);
-        checkPhotoAssociationWithUser(user, photo);
-
-        if(photoDTO.beachId() != null)
-            photo.setBeach(beachRepository.getReferenceById(photoDTO.beachId()));
-
-        if(!photoDTO.url().isEmpty())
-            photo.setUrl(photoDTO.url());
-
-        if(!photoDTO.url().isEmpty())
-            photo.setUrl(photoDTO.url());
-
-        return photoRepository.save(photo);
     }
 
     @Transactional

@@ -1,9 +1,6 @@
 package com.coastalcare.infra;
 
-import com.coastalcare.infra.exceptions.AddressInfoNotFoundException;
-import com.coastalcare.infra.exceptions.EntityHasNoAssociationException;
-import com.coastalcare.infra.exceptions.ExpiredEventException;
-import com.coastalcare.infra.exceptions.PasswordConfirmationException;
+import com.coastalcare.infra.exceptions.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,10 +18,17 @@ public class ErrorHandler {
             PasswordConfirmationException.class,
             ExpiredEventException.class,
             EntityHasNoAssociationException.class,
-            AddressInfoNotFoundException.class
+            AddressInfoNotFoundException.class,
+            InvalidImageFileException.class,
+            FailUploadedImageToS3Exception.class
     })
     public ResponseEntity<Void> error400(){
         return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(FailAwsConnectException.class)
+    public ResponseEntity<Void> error500(){
+        return ResponseEntity.internalServerError().build();
     }
 
 }
